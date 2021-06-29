@@ -7,13 +7,29 @@
 </head>
 <body>
 
+
+
     <div id="app">
-
+        <p>{{name}}</p>
+        <p>{{age}}</p>
     </div>
-
+    <script src="./app.js"></script>
     <script type="module">
-        import compile from './vue/compile.js';
-        var result = compile("姓名：{{name}}, 年龄：{{age}}, 居住省份：{{addr.province}}", {
+        // import compile from './vue/compile.js';
+        // var result = compile("姓名：{{name}}, 年龄：{{age}}, 居住省份：{{addr.province}}", {
+        //     name: 'monica',
+        //     age: 16,
+        //     addr: {
+        //         province: '黑龙江',
+        //         city: '哈尔滨'
+        //     }
+        // })
+        // console.log(result);
+        import {createVNode} from './vue/vnode.js';
+        var VNode = createVNode(document.getElementById('app'));
+        // console.log(createVNode);
+        import render from './vue/render.js'
+        render(VNode, {
             name: 'monica',
             age: 16,
             addr: {
@@ -21,7 +37,32 @@
                 city: '哈尔滨'
             }
         })
-        // console.log(result);
+        //数据发生变化，重新调用render函数
+        // setTimeout(() => {
+        //     render(VNode, {
+        //         name: 'monica',
+        //         age: 18,
+        //         addr: {
+        //             province: '黑龙江',
+        //             city: '哈尔滨'
+        //         }
+        //     })
+        // }, 3000);
+        // import createResponsive from './vue/dataResponsive.js';
+        // var origin = {          //原始对象
+        //         name: 'monica',
+        //         age: 18,
+        //         addr: {
+        //             province: '黑龙江',
+        //             city: '哈尔滨'
+        //            }
+        //     }
+        // window.target = {};//目标对象
+        // createResponsive(origin, target, function (prop) {//当属性发生变化的时候触发回调函数
+        //     console.log(prop + '发生了变化');
+        // })
+        import Vue from './vue/vue.js';
+        
     </script>
 </body>
 </html>

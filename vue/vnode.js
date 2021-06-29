@@ -20,6 +20,7 @@ function VNode(realDOM, template){
  */
 
 export default function createVNode (realDOM){
+    // console.log(VNode);
     var root = new VNode(realDOM, '');
 
     if (realDOM.nodeType === Node.TEXT_NODE) {
@@ -29,8 +30,10 @@ export default function createVNode (realDOM){
     } else {
         // 不是文本节点 
         for (let i = 0; i < realDOM.childNodes.length; i++) {// realDOM.childNodes: 所有的子节点 而不是所有的子元素 
-            var childRealNode = realDOM.childNodes[i]; //拿到真实节点的子节点            
-        }    
+            var childRealNode = realDOM.childNodes[i]; //拿到真实节点的子节点         
+            var vNode = createVNode(childRealNode);//递归创建虚拟节点
+            root.children.push(vNode);
+        }
     }
     return root;
 }
