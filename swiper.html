@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .wrap {
+      width: 700px;
+      height: 400px;
+      margin: 20px auto;
+      border: 2px solid #f40;
+      position: relative;
+    }
+    .list {
+      /* width: 100%; */
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4200px;
+      height: 100%;
+    }
+    .list li {
+      width: 700px;
+      height: 400px;
+      text-align: center;
+      line-height: 400px;
+      float: left;
+      /* color: #eee; */
+    }
+    .list li:nth-of-type(1) {
+      background-color: antiquewhite;
+    }
+    
+    .list li:nth-of-type(2) {
+      background-color: aqua;
+    }
+    .list li:nth-of-type(3) {
+      background-color: aquamarine;
+    }
+    
+    .list li:nth-of-type(4) {
+      background-color: blueviolet;
+    }
+    
+    .list li:nth-of-type(5) {
+      background-color: coral;
+    }
+    .list li:nth-of-type(6) {
+      background-color: antiquewhite;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <ul class="list">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>1</li>
+    </ul>
+  </div>
+  <script src="./swiper.js"></script>
+
+</body>
+</html>

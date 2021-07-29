@@ -47,12 +47,12 @@ Compiler.prototype.compileText = function (node) {
 
 // 编译元素节点, 处理指令
 Compiler.prototype.compileElement = function (node) {
-  console.log(Array.from(node.attributes))
+  // console.log(Array.from(node.attributes))
   // 遍历所有属性节点
   Array.from(node.attributes).forEach(attr => {
+    console.dir(attr)
     // 判断是否是指令
     let attrName = attr.name
-    console.log(attrName)
     if (this.isDirective(attrName)) {
       // v-text --> text
       attrName = attrName.substr(2)
@@ -91,6 +91,7 @@ Compiler.prototype.modelUpdater = function (node, value, key) {
 
 // 判断元素属性是否是指令
 Compiler.prototype.isDirective = function (attrName) {
+  // console.log('isDirective', attrName)
   return attrName.startWith('v-')
 }
 

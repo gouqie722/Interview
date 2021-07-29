@@ -1,3 +1,4 @@
+// 添加注释到文件头插件 vscode-fileheader
 function unique(arr) {
   function isSame(obj1, obj2) {
     for (const prop in obj1) {
