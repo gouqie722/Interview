@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .play {
+      width: 56px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      background-color: #ffa500;
+      color: #fff;
+      box-shadow: 0px 0px 4px 2px #f7b603;
+      /* 1371939273 */
+      /* https://music.163.com/song/media/outer/url?id=1371939273.mp3 */
+    }
+    .view {
+      width: 700px;
+      height: 500px;
+      border: 1px solid #f40;
+      display: flex;
+      /* justify-content: ; */
+      align-items: flex-end;
+    }
+    .item {
+      /* flex: ; */
+      flex: 1 1 auto;
+    }
+    .item:nth-of-type(1) {
+      background-color: orange;
+    }
+    
+    .item:nth-of-type(2) {
+      background-color: orangered;
+    }
+    .item:nth-of-type(3) {
+      background-color: orchid;
+    }
+    .item:nth-of-type(4) {
+      background-color: palegoldenrod;
+    }
+    .item:nth-of-type(5) {
+      background-color: palegreen;
+    }
+    .item:nth-of-type(6) {
+      background-color: paleturquoise;
+    }
+    .item:nth-of-type(7) {
+      background-color: palevioletred;
+    }
+  </style>
+</head>
+<body>
+  <audio crossorigin="anonymous" src="http://m10.music.126.net/20210717175054/462fef8f15e5ecae979139beef551aa1/ymusic/0552/035b/555a/2830fd68d141a3bfb53db0f00fbf7a2f.mp3"></audio>
+  <div class="play">播放</div>
+  <div class="view">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+  <script src="./demo.js"></script>
+</body>
+</html>
