@@ -23,5 +23,66 @@
 //   console.log('连接成功')
 // })
 
+function Vue(options) {
+  this.options = options
+  var data = this._data = options.data
+  new Observe(data)
+  Object.keys(data).forEach(item => {
+    // let val = data[item]
+    Object.defineProperty(this, item, {
+      enumerable: true,
+      configurable: true,
+      get() {
+        return this._data[item]
+      },
+      set(newVal) {
+        this._data[item] = newVal
+      }
+    })
+  })
+}
+
+
+function observer(data) {
+  Object.keys(data).forEach(item => {
+    console.log(item)
+    let val = data[item]
+    Observe(val)
+    Object.defineProperty(data, item, {
+      enumerable: true,
+      configurable: true,
+      get() {
+        console.log('get =>', val)
+        return val
+      },
+      set(newVal) {
+        if (newVal === val) {
+          return
+        }
+        console.log('set =>', newVal)
+        val = newVal
+        Observe(newVal)
+      }
+    })
+  })
+}
+
+function Observe(data) {
+  // console.log(Object.prototype.toString.call(data))
+  if (Object.prototype.toString.call(data) !== '[object Object]') {
+    return
+  }
+  observer(data)
+}
+
+var vm = new Vue({
+  data: {
+    a: {
+      b: 90
+    },
+    demo: 23
+  }
+})
+
 
 
