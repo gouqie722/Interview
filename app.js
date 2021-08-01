@@ -22,6 +22,7 @@
 // }, () => {
 //   console.log('连接成功')
 // })
+var app = document.getElementById('app')
 
 function Vue(options) {
   this.options = options
@@ -40,10 +41,50 @@ function Vue(options) {
       }
     })
   })
+  // 编译
+  new Compile(options.el, this)
 }
 
+function Compile(el, vm) {
+  vm.$el = document.querySelector(el)
+  let fragment = document.createDocumentFragment()
+  while (child = vm.$el.firstChild) {
+    fragment.appendChild(child)
+  }
+  // console.dir(fragment)
+  replace(fragment)
+  function replace (fragment){
+    Array.from(fragment.childNodes).forEach(node => {
+      let text = node.textContent
+      let reg = /\{\{(.*)\}\}/
+      if (node.nodeType === 3 && reg.test(text)) {
+        // console.log(RegExp.$1)
+        let exp = RegExp.$1
+        console.log(exp)
+        let arr = exp.replace(/ /g, '').split('.')
+        // console.log(arr)
+        let val = vm
+        arr.forEach(item => {
+          val = val[item]
+        })
+        console.log(exp)
+        new Watcher(vm, exp.replace(/ /g, ''), function (newVal) { // 函数里接收一个新的值
+          console.log(newVal)
+          node.textContent = text.replace(reg, newVal)
+        })
+        node.textContent = text.replace(reg, val)
+        console.log(val)
+      }
+      if (node.childNodes) {
+        replace(node)
+      }
+    })
+  }
+  vm.$el.appendChild(fragment)
+}
 
 function observer(data) {
+  let dep = new Dep()
   Object.keys(data).forEach(item => {
     console.log(item)
     let val = data[item]
@@ -52,7 +93,8 @@ function observer(data) {
       enumerable: true,
       configurable: true,
       get() {
-        console.log('get =>', val)
+        Dep.target && dep.addSub(Dep.target)
+        console.log('get =>', Dep.target)
         return val
       },
       set(newVal) {
@@ -62,6 +104,7 @@ function observer(data) {
         console.log('set =>', newVal)
         val = newVal
         Observe(newVal)
+        dep.notify()
       }
     })
   })
@@ -75,7 +118,46 @@ function Observe(data) {
   observer(data)
 }
 
+
+function Dep() {
+  this.subs = []
+}
+
+Dep.prototype.addSub = function (sub) {
+  this.subs.push(sub)
+  console.log(this.subs)
+}
+
+Dep.prototype.notify = function () {
+  this.subs.forEach(sub => sub.update())
+}
+
+function Watcher(vm, exp, fn) {
+  this.fn = fn
+  this.vm = vm
+  this.exp = exp
+  Dep.target = this
+  let val = vm
+  let arr = exp.split('.')
+  arr.forEach(item => {
+    val = val[item]
+  })
+
+  console.log(Dep.target, val, '0')
+  Dep.target = null
+}
+
+Watcher.prototype.update = function () {
+  let val = this.vm
+  let arr = this.exp.split('.')
+  arr.forEach(item => {
+    val = val[item]
+  })
+  this.fn(val)
+}
+
 var vm = new Vue({
+  el: '#app',
   data: {
     a: {
       b: 90
@@ -86,3 +168,4 @@ var vm = new Vue({
 
 
 
+// https://www.bilibili.com/video/BV1u4411W7ei?p=7&spm_id_from=pageDriver
