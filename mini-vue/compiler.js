@@ -72,7 +72,7 @@ Compiler.prototype.update = function (node, key, attrName) {
 Compiler.prototype.textUpdater = function (node, value, key) {
   node.textConent = value
   new Watcher(this.vm, key, function (newVal) {
-    node.textConent = newVal
+    node.textContent = newVal
   })
 }
 
@@ -92,7 +92,7 @@ Compiler.prototype.modelUpdater = function (node, value, key) {
 // 判断元素属性是否是指令
 Compiler.prototype.isDirective = function (attrName) {
   // console.log('isDirective', attrName)
-  return attrName.startWith('v-')
+  return attrName.startsWith('v-')
 }
 
 // 判断节点是否是文本节点
