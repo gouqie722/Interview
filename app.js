@@ -68,6 +68,7 @@ function Compile(el, vm) {
           val = val[item]
         })
         console.log(exp)
+        // 观察者模式
         new Watcher(vm, exp.replace(/ /g, ''), function (newVal) { // 函数里接收一个新的值
           console.log(newVal)
           node.textContent = text.replace(reg, newVal)
