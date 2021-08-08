@@ -287,6 +287,17 @@ function getNodeText(el) {
  */
 function mount(vm, el) {
   vm._vNode = constructVNode(vm, el, null)
+  render(vm, vm._vNode)
 }
+
+
+
+function render(vm, vNode) {
+  if (!vNode) {
+    return undefined
+  }
+  
+}
+
 
 // https://www.bilibili.com/video/BV1u4411W7ei?p=7&spm_id_from=pageDriver
