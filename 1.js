@@ -1,6 +1,21 @@
 // console.log(Number({a: 0}));
 // console.log([]+{});
 
+
+/**
+ * HTTP/1.0/1.1/2.0
+ * 
+ */
+
+
+// 实现一个并发的函数
+class PromiseQueue {
+    constructor (options = {}) {
+        
+    }
+}
+
+
 /**
  * Number()
  *      1. undefined  NaN
