@@ -43,3 +43,8 @@ function selectionSort(arr) {
 var arr = [5, 1, 3, 4, 7, 6];
 selectionSort(arr);
 console.log(arr);
+
+
+// https://juejin.cn/post/6844904046436843527 大文件断点续传
+// https://juejin.cn/post/6844904180914601991#heading-8 HLS + ffmpeg 实现动态码流视频服务
+// https://juejin.cn/post/6844903968338870285#heading-13 各种文件上传攻略，从小图片到大文件断点续传
