@@ -5,21 +5,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .wrap {
+      display: flex;
+      width: 700px;
+      height: 300px;
+      border: 1px solid #f40;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .wrap div {
+      width: 200px;
+      height: 200px;
+      background-color: burlywood;
+
+    }
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <div>1</div>
+    <div>1</div>
+  </div>
   <ul></ul>
   <script>
-    var ul = document.getElementsByTagName('ul')[0]
-    setTimeout(() => {
-      var str = ''
-      for (let i = 0; i < 10; i++) {
-        str += `<li data-id="${i}" onclick="test(event)">${i}</li>`
-      }
-      ul.innerHTML = str
-    }, 1000)
-    function test(e) {
-      console.dir(e.target)
-    }
+    // var ul = document.getElementsByTagName('ul')[0]
+    // setTimeout(() => {
+    //   var str = ''
+    //   for (let i = 0; i < 10; i++) {
+    //     str += `<li data-id="${i}" onclick="test(event)">${i}</li>`
+    //   }
+    //   ul.innerHTML = str
+    // }, 1000)
+    // function test(e) {
+    //   console.dir(e.target)
+    // }
   </script>
 </body>
 </html>
