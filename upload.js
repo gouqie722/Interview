@@ -6,9 +6,10 @@ btn.onclick = upload
 function upload() {
   let formData = new FormData() // 帮助你构建一个formData格式的消息体
   let file = input.files[0]
+  let chunks = []
   console.log(file)
   formData.append('files', file)
-  console.log(formData.get('files'))
+  
   
   
 
