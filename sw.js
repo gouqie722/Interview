@@ -1,6 +1,20 @@
-function active(index) {
-  var list = document.getElementsByClassName('list')[0].getElementsByTagName('li');
+var list = document.getElementsByClassName('list')[0].getElementsByTagName('li');
 
+[...list].forEach((item, i) => {
+  (function (i){
+    item.addEventListener('click', () => {
+      // if (i === index) {
+      //   return undefined
+      // }
+      if (item.className === 'layer') {
+        return undefined        
+      }
+      active(i)
+    }, false)
+  })(i)
+})
+
+function active(index) {
   var prevIndex = index - 1
   prevIndex < 0 && (prevIndex = list.length - 1)
   var nextIndex = index + 1;
@@ -11,20 +25,42 @@ function active(index) {
   list[nextIndex].className = 'right'
 }
 
+var timer = null
+var index = 0
+
+document.getElementsByClassName('list')[0].addEventListener('mouseenter', () => {
+  clearInterval(timer)
+}, false)
+document.getElementsByClassName('list')[0].addEventListener('mouseleave', () => {
+  init()
+}, false)
+
+// document.getElementsByClassName('left')[0].addEventListener('click', () => {
+//   console.log(index)
+  
+//   index = (index -= 1) %= document.getElementsByClassName('list')[0].getElementsByTagName('li').length
+//   active(index)
+// }, false)
+// document.getElementsByClassName('right')[0].addEventListener('click', () => {
+//   console.log(index)
+//   index = (index ++) %= document.getElementsByClassName('list')[0].getElementsByTagName('li').length
+//   active(index)
+// }, false)
 
 function init() {
-  var index = 0
   // setInterval(() => {
 
   //   active(index)
   //   index %= document.getElementsByClassName('list')[0].getElementsByTagName('li').length
   // }, 3000)
+  var len = document.getElementsByClassName('list')[0].getElementsByTagName('li').length
   active(index)
-  setInterval(function () {
-    index ++
-    index = index %= document.getElementsByClassName('list')[0].getElementsByTagName('li').length
+  timer = setInterval(function () {
+    // index = (index ++) % len
+    // console.log((index ++) % len)
+    index = (index + 1) % len
     active(index)
-  }, 1000)
+  }, 1500)
 }
 
 window.onload = function () {
