@@ -21,14 +21,14 @@ function move(dom, num) {
 function init() {
   setInterval(() => {
     index ++
-    // oList.style.left = - (offsetWdith * index) + 'px'
+    // oList.style.left = - (offsetWidth * index) + 'px'
     if (index === oli.length - 1) {
       index = 0
       oList.style.left = 0 + 'px'
     }
-    move(oList, offsetWdith * index)
+    move(oList, offsetWidth * index)
     console.log(index)
-    
+
   }, 4000);
 }
 
