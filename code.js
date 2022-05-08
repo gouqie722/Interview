@@ -27,40 +27,39 @@ let tasks = [
 //  * @param {*} tasks 并发队列
 //  * @param {*} poolLimit 并发数量
 //  */
-// function createRequest(tasks, poolLimit) {
-//   poolLimit = poolLimit || 2;
-//   let results = [],
-//       together = new Array(poolLimit).fill(null), // 创建一个工作区
-//       index = 0;
-//   together = together.map(() => {
-//     return new Promise((resolve, reject) => {
-      
-//       function run() {
-//         if (index >= tasks.length) {
-//           resolve();
-//           return;
-//         }
-//         let oldIndex = index,
-//             task = tasks[index++];
-//         console.log(index, tasks[oldIndex]);
-//         // index ++;
-//         task().then(result => {
-//           results[oldIndex] = result;
-//           run()
-//         }).catch(reason => { reject(reason) })
-//       }
-//       run();
-//     })
-//   })
-//   return Promise.all(together).then(() => results, reason => Promise.reject(reason))
-// }
+function createRequest(tasks, poolLimit) {
+  poolLimit = poolLimit || 2;
+  let results = [],
+      together = new Array(poolLimit).fill(null), // 创建一个工作区
+      index = 0;
+  together = together.map(() => {
+    return new Promise((resolve, reject) => {
+      function run() {
+        if (index >= tasks.length) {
+          resolve();
+          return;
+        }
+        let oldIndex = index,
+            task = tasks[index++];
+        console.log(index, tasks[oldIndex]);
+        // index ++;
+        task().then(result => {
+          results[oldIndex] = result;
+          run()
+        }).catch(reason => { reject(reason) })
+      }
+      run();
+    })
+  })
+  return Promise.all(together).then(() => results, reason => Promise.reject(reason))
+}
 
-// createRequest(tasks, 2).then(results => {
-//   // 整体成功才能算成功，按顺序储存结果
-//   console.log('成功 ==>', results);
-// }, reason => {
-//   console.log('失败 ==>', reason);
-// })
+createRequest(tasks, 2).then(results => {
+  // 整体成功才能算成功，按顺序储存结果
+  console.log('成功 ==>', results);
+}, reason => {
+  console.log('失败 ==>', reason);
+})
 
 
 /**
